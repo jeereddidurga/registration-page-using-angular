@@ -1,0 +1,47 @@
+<form [formGroup]=fg>
+    <input type="text" id="name" placeholder="Enter name" formControlName="name">
+    <input type="email" id="email" placeholder="Enter email" formControlName="email">
+    <input type="password" id="password" placeholder="Enter password" formControlName="password">
+    <button (click)="updateuser()">update</button>
+    <button (click)="postdata()">Insert</button>
+ 
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>password</th>
+            <th>action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let record of records">
+            <td>{{record.id}}</td>
+            <td>{{record.name}}</td>
+            <td>{{record.email}}</td>
+            <td>{{record.password}}</td>
+            <td>
+                <button class="btn btn-outline-primary" (click)="updateForm(record)">update</button>
+                <button class="btn btn-outline-danger" (click)="deleteuser(record.id)">delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <label for="searchemail">search for email:</label>
+    <input type="searchemail" name="searchbyemail" [(ngModel)]="searchbyemail">
+    <button type="button" (click)="searchbyEmail(searchbyemail)">Search</button>
+</div> 
+<div *ngIf="foundRecord">
+    <h2>id:{{foundRecord.id}}</h2>
+    <h2>name:{{foundRecord.name}}</h2>
+    <h2>email:{{foundRecord.email}}</h2>
+</div>
+<div *ngIf="!foundRecord && searchbyemail! == '' ">
+    <p>no record found</p>
+
+</div>
